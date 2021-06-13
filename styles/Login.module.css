@@ -1,0 +1,56 @@
+.login {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 30rem;
+  margin: 5rem auto;
+  border: 1px solid #b2b2b2cf;
+  box-shadow: 0px 0px 5px 1px #888888;
+}
+
+.loginHead {
+  margin-top: 2rem;
+}
+
+.loginHead > img {
+  width: 10rem;
+  padding: 0 1rem;
+}
+
+.loginForm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 30rem;
+  padding: 0 1rem;
+}
+
+.loginForm > .formTextField {
+  width: 100%;
+  margin: 0.5rem 0;
+}
+
+.loginForm > .formBtn {
+  margin: 1rem 0;
+}
+
+.forgetPassword {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.forgetPassword > a {
+  color: #007bff;
+}
+
+.loginBottom {
+  margin: 2rem 0;
+}
+
+.loginDivider {
+  width: 90%;
+  margin-top: 16px !important;
+}

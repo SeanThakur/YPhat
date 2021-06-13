@@ -1,0 +1,29 @@
+.carouselSlider {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0;
+}
+
+.carouselSlider > h2 {
+  margin: 0 15px;
+}
+
+.carouselSlider__Carousel {
+  margin: 1rem 0;
+}
+
+.carouselSlider__CardRoot {
+  margin: 0.5rem 2rem;
+}
+
+.carouselSlider__CardContent > p {
+  font-size: 1.2rem;
+}
+
+.carouselSlider__CardPosted {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  color: #f6921e;
+}

@@ -1,0 +1,25 @@
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: auto;
+  background-color: #f9f9f9;
+  padding: 0 1.5rem;
+}
+
+.navLogo {
+  width: 10rem;
+  cursor: pointer;
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 10rem;
+}
+
+.navLinks > a {
+  color: #f6921e;
+  font-size: 20px;
+}

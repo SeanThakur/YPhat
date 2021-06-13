@@ -1,0 +1,38 @@
+.detailsList {
+  flex: 0.4 1;
+}
+/* DetailsList Item CSS Modules */
+
+.detailsListItem {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  cursor: pointer;
+  margin: 10px 0;
+}
+
+.detailsListItem__Image {
+  /* width: 100%; */
+}
+
+.detailsListItem__Content {
+  margin-left: 0.5rem;
+}
+
+.detailsListItem__Content > h6 {
+  margin: 0.25rem 0;
+  font-size: 15px;
+}
+
+.detailsListItem__Content > p {
+  margin: 0.2rem 0;
+  font-size: 13px;
+  color: #808080;
+  display: flex;
+  align-items: center;
+}
+
+.detailsListItem__Content > p > .detailsListItem__Check {
+  font-size: 0.85rem;
+  margin-left: 0.25rem;
+}

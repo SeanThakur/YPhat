@@ -1,0 +1,42 @@
+.covidAlert {
+  padding: 0.5rem;
+  background-color: #f6921e;
+}
+
+.container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.covidAlertInfo > h2 {
+  color: #fff;
+  letter-spacing: 1px;
+  font-size: 30px;
+  font-weight: 600;
+  margin: 0.5rem 0;
+}
+
+.covidAlertInfo > p {
+  color: #fff;
+  margin-bottom: 0px;
+  font-size: 18px;
+  margin: 0.5rem 0;
+}
+
+.covidAlertBtn > a.donateBtn {
+  display: inline-block;
+  padding: 15px 45px;
+  border-radius: 30px;
+  color: #f6921e;
+  font-size: 19px;
+  font-weight: 700;
+  background: #fff;
+  text-transform: uppercase;
+}
+
+.covidAlertBtn > a.donateBtn:hover {
+  color: #fff;
+  background: black;
+  text-decoration: underline;
+}

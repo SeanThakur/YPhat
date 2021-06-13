@@ -1,0 +1,33 @@
+.details {
+  flex: 1;
+}
+
+/* DetailsItem CSS Modules */
+
+.DetailsItem {
+  padding: 10px;
+}
+
+.DetailsItem__Image {
+  height: auto;
+  width: 100%;
+}
+
+.DetailsItem__nameTemp > .DetailsItem__Title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.DetailsItem__nameTemp > .DetailsItem__ViewDates {
+  display: flex;
+  align-items: center;
+  color: #808080;
+}
+
+.DetailsItem__nameTemp > .DetailsItem__ViewDates > .DetailsItem__Dates {
+  margin-left: 1rem;
+}
+
+.DetailsItem__content {
+  color: #808080;
+}

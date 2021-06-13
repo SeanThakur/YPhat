@@ -1,0 +1,65 @@
+.organisation {
+  margin: 1rem 0;
+}
+
+.sectionField {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.25rem;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.sectionField > .sectionTitle {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.sectionField > .sectionTitle:hover {
+  color: #f6921e;
+}
+
+.sectionField > .sectionViewAll {
+  font-size: 15px;
+  padding-right: 6px;
+  padding-top: 5px;
+  color: #f6921e;
+}
+
+.card {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card > .cardRow {
+  flex-basis: 25%;
+}
+
+.card > .cardRow > .cardRoot {
+  margin: 15px;
+  cursor: pointer;
+}
+
+.card > .cardRow > .cardRoot > .cardMedia {
+  height: 200px;
+}
+
+.card > .cardRow > .cardRoot > .cardActions {
+  justify-content: flex-end;
+}
+
+.card > .cardRow > .cardRoot > .cardLocation {
+  display: flex;
+  align-items: center;
+}
+
+.card > .cardRow > .cardRoot > .cardLocation > .locationIcon {
+  color: #ff0000;
+  font-size: 1.1rem;
+  margin-left: 1rem;
+}
+.card > .cardRow > .cardRoot > .cardLocation > .locationTitle {
+  font-size: 1rem;
+  padding-left: 0.25rem;
+}
