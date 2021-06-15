@@ -1,4 +1,7 @@
-  import {GET_ERROR} from "./types";
+import {
+    GET_ERROR,
+    ERROR_CLEANUP
+} from "./types";
 
 const initialState = {}
 
@@ -9,6 +12,8 @@ export default function(state = initialState, action)
     {
         case GET_ERROR:
             return action.payload;
+        case ERROR_CLEANUP:
+            return {};
         default:
             return state;
     }

@@ -1,9 +1,22 @@
 import react from 'react';
 import Link from 'next/link'
-
 import styles from '../../styles/Nav.module.css';
+import { setErrorClear, setLogout } from '../../feature/auth/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
 
 const Nav = () => {
+    const dispatch = useDispatch();
+    const router = useRouter();
+
+    const auth = useSelector(state => state.auth);
+
+    const handleLoginSubmit = () => {
+        dispatch(setLogout())
+        dispatch(setErrorClear())
+        router.push('/login')
+    }
+
     return (
         <div className={styles.nav}>
             <Link href='/'>
@@ -13,16 +26,28 @@ const Nav = () => {
                 />
             </Link>
             <div className={styles.navLinks}>
-                <Link
-                    href="/login"
-                >
-                    <a>Login</a>
-                </Link>
-                <Link
-                    href="/register"
-                >
-                    Register
-                </Link>
+                {
+                    auth.isAuth === true ?
+                    <div
+                        onClick={handleLoginSubmit}
+                        className={styles.logout}
+                    >
+                        Logout
+                    </div>
+                    :
+                    <>
+                        <Link
+                            href="/login"
+                        >
+                            Login
+                        </Link>
+                        <Link
+                            href="/register"
+                        >
+                            Register
+                        </Link>
+                    </>
+                }
             </div>
         </div>
     )

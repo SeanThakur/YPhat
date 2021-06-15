@@ -23,3 +23,9 @@
   color: #f6921e;
   font-size: 20px;
 }
+
+.logout {
+  color: #f6921e;
+  font-size: 20px;
+  cursor: pointer;
+}

@@ -1,23 +1,147 @@
-import { Button, FormControl, FormControlLabel, InputLabel, MenuItem, Radio, RadioGroup, Select, TextField } from '@material-ui/core'
-import React, { useState } from 'react'
+import { Button, FormControl, FormControlLabel, FormHelperText, InputLabel, MenuItem, Radio, RadioGroup, Select, TextField } from '@material-ui/core'
+import React, { useEffect, useState } from 'react'
 import styles from '../styles/Register.module.css'
+import Link from 'next/link'
+import { useDispatch, useSelector } from 'react-redux'
+import { useRouter } from 'next/router'
+import { setRegister, setErrorClear  } from '../feature/auth/actions'
 
 const Register = () => {
 
+    const dispatch = useDispatch();
+    const router = useRouter();
+    // const error = useSelector(state => state.error);
+
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
+    const [phone, setPhone] = useState('')
+    const [orgEmail, setOrgEmail] = useState('')
+    const [orgName, setOrgName] = useState('')
+    const [orgType, setOrgType] = useState('')
+    const [address, setAddress] = useState('')
+    const [city, setCity] = useState('')
+    const [state, setState] = useState('')
+    const [pinCode, setPinCode] = useState('')
+    const [country, setCountry] = useState('')
+
     const [event, setEvent] = useState('personal')
+
+    const [passwordValidationError, setPasswordValidationError] = useState(null)
 
     const handleRadioChange = (e) => {
         setEvent(e.target.value)
     }
+
+    useEffect(() => {
+
+        if(password !== confirmPassword) {
+            setPasswordValidationError('Password not matched.')
+        }
+
+        if(password === confirmPassword) {
+            setPasswordValidationError(null)
+        }
+
+    }, [confirmPassword])
+
+    const handleRegisterSubmit = (e) => {
+        e.preventDefault()
+
+        if(event === 'personal') {
+
+            if(password === confirmPassword) {
+
+                const data = {
+                    firstName: firstName,
+                    lastName: lastName,
+                    email: email,
+                    phone: '',
+                    address: '',
+                    city: '',
+                    sate: '',
+                    country: '',
+                    pin: '',
+                    gender: 'static',
+                    avatar: '',
+                    latitude: '',
+                    longitude: '',
+                    password: password,
+                    organisationInfo: {
+                        type: '',
+                        name: '',
+                        address: '',
+                        city: '',
+                        sate: '',
+                        country: '',
+                        pin: '',
+                        email: '',
+                        phone: ''
+                    }
+                }
+        
+                dispatch(setRegister(data, router))
+                dispatch(setErrorClear())
+        
+                // console.log(data)
+            }
+
+        } else if(event === 'organization') {
+            
+            if(password === confirmPassword  && orgType.length > 0) {
+
+                const data = {
+                    firstName: firstName,
+                    lastName: lastName,
+                    email: email,
+                    phone: phone,
+                    address: address,
+                    city: city,
+                    sate: state,
+                    country: country,
+                    pin: pinCode,
+                    gender: 'static',
+                    avatar: '',
+                    latitude: '',
+                    longitude: '',
+                    password: password,
+                    organisationInfo: {
+                        type: orgType,
+                        name: orgName,
+                        address: address,
+                        city: city,
+                        sate: state,
+                        country: country,
+                        pin: pinCode,
+                        email: orgEmail,
+                        phone: phone
+                    }
+                }
+        
+                dispatch(setRegister(data, router))
+                dispatch(setErrorClear())
+        
+                // console.log(data)
+            }
+
+        }
+
+    }
+
     return (
         <div className={styles.register}>
             <div className={styles.registerHead}>
                 <div className={styles.registerTitle}>
-                    <a href="/">
+                    <Link 
+                        href="/"
+                    >
                         <img 
                             src="/assets/images/login/logo.png"
+                            className={styles.registerImage}
                         />
-                    </a>
+                    </Link>
                     <h3>
                         Create Your YPhat Account
                     </h3>
@@ -27,6 +151,7 @@ const Register = () => {
                 </div>
                 <form
                     className={styles.registerForm}
+                    onSubmit={handleRegisterSubmit}
                 >
                     <div
                         className={styles.registerFormSmallFields}
@@ -37,10 +162,11 @@ const Register = () => {
                                 label="First Name"
                                 type="text"
                                 placeholder="First Name"
-                                // value={firstName}
-                                // onChange={handleFirstNameChange}
+                                value={firstName}
+                                onChange={(e) => setFirstName(e.target.value)}
                                 variant="outlined"
                                 className={styles.registerFormTextField}
+                                required
                             />
                         </div>
                         <div className={styles.registerFormSmallRow}>
@@ -49,10 +175,11 @@ const Register = () => {
                                 label="Last Name"
                                 type="text"
                                 placeholder="Last Name"
-                                // value={lastName}
-                                // onChange={handleLastNameChange}
+                                value={lastName}
+                                onChange={(e) => setLastName(e.target.value)}
                                 variant="outlined"
                                 className={styles.registerFormTextField}
+                                required
                             />
                         </div>
                     </div>
@@ -64,12 +191,20 @@ const Register = () => {
                             label="Email"
                             type="email"
                             placeholder="Email"
-                            // value={lastName}
-                            // onChange={handleLastNameChange}
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                             variant="outlined"
                             className={styles.registerFormTextField}
+                            required
                         />
                     </div>
+                    {/* {
+                        <small className={styles.registerFormEmailAlert}>
+                            {
+                                error?.message
+                            }
+                        </small>
+                    } */}
                     <div
                          className={styles.registerFormSmallFields}
                     >
@@ -79,10 +214,11 @@ const Register = () => {
                                 label="Password"
                                 type="password"
                                 placeholder="Password"
-                                // value={password}
-                                // onChange={handlePasswordChange}
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                                 variant="outlined"
                                 className={styles.registerFormTextField}
+                                required
                             />
                         </div>
                         <div className={styles.registerFormSmallRow}>
@@ -91,11 +227,19 @@ const Register = () => {
                                 label="Confirm Password"
                                 type="password"
                                 placeholder="Confirm Password"
-                                // value={confirmPassword}
-                                // onChange={handleConfirmPasswordChange}
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
                                 variant="outlined"
                                 className={styles.registerFormTextField}
+                                required
                             />
+                            {
+                                <small className={styles.registerFormConfirmPasswordAlert}>
+                                    {
+                                        passwordValidationError && passwordValidationError
+                                    }
+                                </small>
+                            }
                         </div>
                     </div>
                     <small className={styles.registerFormPasswordAlert}>
@@ -115,17 +259,21 @@ const Register = () => {
                                     <FormControl variant="outlined" className={styles.registerSelectFormControl}>
                                         <InputLabel>Organization Type</InputLabel>
                                         <Select
-                                            // value={organizationType}
-                                            // onChange={handleOrganizationTypeChange}
+                                            value={orgType}
+                                            onChange={(e) => setOrgType(e.target.value)}
                                             label="Organization Type"
+                                            required={orgType === ""}
                                         >
                                             <MenuItem value="">
                                                 <em>Choose Organization Type</em>
                                             </MenuItem>
-                                            <MenuItem value={10}>Charities</MenuItem>
-                                            <MenuItem value={20}>Donation</MenuItem>
-                                            <MenuItem value={30}>Temples</MenuItem>
+                                            <MenuItem value="charity">Charities</MenuItem>
+                                            <MenuItem value="veg_shop">Vegan Shop</MenuItem>
+                                            <MenuItem value="veg_restaurent">Vegan Restaurent</MenuItem>
+                                            <MenuItem value="temple">Buddhist Temple,Monastery</MenuItem>
+                                            <MenuItem value="travel_agent">Buddhist Temple Tour-Travel Agent</MenuItem>
                                         </Select>
+                                        <FormHelperText>Required</FormHelperText>
                                     </FormControl>
                                 </div>
                                 <div
@@ -136,10 +284,11 @@ const Register = () => {
                                         label="Organization Name"
                                         type="text"
                                         placeholder="Organization Name"
-                                        // value={lastName}
-                                        // onChange={handleLastNameChange}
+                                        value={orgName}
+                                        onChange={(e) => setOrgName(e.target.value)}
                                         variant="outlined"
                                         className={styles.registerFormTextField}
+                                        required={event === 'organization'}
                                     />
                                 </div>
                                 <div
@@ -150,10 +299,11 @@ const Register = () => {
                                         label="Address"
                                         type="text"
                                         placeholder="Address"
-                                        // value={lastName}
-                                        // onChange={handleLastNameChange}
+                                        value={address}
+                                        onChange={(e) => setAddress(e.target.value)}
                                         variant="outlined"
                                         className={styles.registerFormTextField}
+                                        required={event === 'organization'}
                                     />
                                 </div>
                                 <div
@@ -165,10 +315,11 @@ const Register = () => {
                                             label="City"
                                             type="text"
                                             placeholder="City"
-                                            // value={password}
-                                            // onChange={handlePasswordChange}
+                                            value={city}
+                                            onChange={(e) => setCity(e.target.value)}
                                             variant="outlined"
                                             className={styles.registerFormTextField}
+                                            required={event === 'organization'}
                                         />
                                     </div>
                                     <div className={styles.registerFormSmallRow}>
@@ -177,10 +328,11 @@ const Register = () => {
                                             label="Post Code"
                                             type="number"
                                             placeholder="Post Code"
-                                            // value={confirmPassword}
-                                            // onChange={handleConfirmPasswordChange}
+                                            value={pinCode}
+                                            onChange={(e) => setPinCode(e.target.value)}
                                             variant="outlined"
                                             className={styles.registerFormTextField}
+                                            required={event === 'organization'}
                                         />
                                     </div>
                                 </div>
@@ -193,10 +345,11 @@ const Register = () => {
                                             label="State"
                                             type="text"
                                             placeholder="State"
-                                            // value={password}
-                                            // onChange={handlePasswordChange}
+                                            value={state}
+                                            onChange={(e) => setState(e.target.value)}
                                             variant="outlined"
                                             className={styles.registerFormTextField}
+                                            required={event === 'organization'}
                                         />
                                     </div>
                                     <div className={styles.registerFormSmallRow}>
@@ -205,10 +358,11 @@ const Register = () => {
                                             label="Country"
                                             type="text"
                                             placeholder="Country"
-                                            // value={confirmPassword}
-                                            // onChange={handleConfirmPasswordChange}
+                                            value={country}
+                                            onChange={(e) => setCountry(e.target.value)}
                                             variant="outlined"
                                             className={styles.registerFormTextField}
+                                            required={event === 'organization'}
                                         />
                                     </div>
                                 </div>
@@ -221,10 +375,11 @@ const Register = () => {
                                             label="Number"
                                             type="number"
                                             placeholder="Number"
-                                            // value={password}
-                                            // onChange={handlePasswordChange}
+                                            value={phone}
+                                            onChange={(e) => setPhone(e.target.value)}
                                             variant="outlined"
                                             className={styles.registerFormTextField}
+                                            required={event === 'organization'}
                                         />
                                     </div>
                                     <div className={styles.registerFormSmallRow}>
@@ -233,10 +388,11 @@ const Register = () => {
                                             label="Email"
                                             type="email"
                                             placeholder="Email"
-                                            // value={confirmPassword}
-                                            // onChange={handleConfirmPasswordChange}
+                                            value={orgEmail}
+                                            onChange={(e) => setOrgEmail(e.target.value)}
                                             variant="outlined"
                                             className={styles.registerFormTextField}
+                                            required={event === 'organization'}
                                         />
                                     </div>
                                 </div>
@@ -244,17 +400,19 @@ const Register = () => {
                         }
                     </div>
                     <div className={styles.registerFormBtnGroup}>
-                        <a 
+                        <Link 
                             href="/login"
                             className={styles.registerFormSignIn}
                         >
                             Sign in
-                        </a>
+                        </Link>
                         <Button 
                             variant="contained" 
                             color="primary"
+                            required
                             className={styles.registerFormBtn}
                             type="submit"
+                            onSubmit={handleRegisterSubmit}
                         >
                             Submit
                         </Button>

@@ -54,3 +54,10 @@
   width: 90%;
   margin-top: 16px !important;
 }
+
+.errorMessage {
+  font-size: 14px;
+  font-weight: 500;
+  color: red;
+  align-self: baseline;
+}
