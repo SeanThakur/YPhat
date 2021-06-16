@@ -6,6 +6,7 @@
   font-weight: 400;
   font-size: 1rem;
   color: #6c757d;
+  margin-left: 1rem;
 }
 
 /* Drawer Item CSS Modules */
@@ -23,6 +24,7 @@
 
 .DrawerItems__Icon {
   font-size: 1.25rem !important;
+  margin-left: 1rem;
 }
 
 .DrawerItems__name {
